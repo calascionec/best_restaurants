@@ -38,6 +38,23 @@
             $this->setId($result_id);
         }
 
+        function getRestaurants()
+        {
+            $restaurants = array();
+            $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants WHERE cuisine_id = {$this->getId()};");
+            foreach ($returned_restaurants as $restaurant) {
+                $name = $restaurant['name'];
+                $location = $restaurant['location'];
+                $hours = $restaurant['hours'];
+                $description = $restaurant['description'];
+                $cuisine_id = $restaurant['cuisine_id'];
+                $id = $restaurant['id'];
+                $new_restaurant = new Restaurant($name, $location, $hours, $description, $cuisine_id, $id);
+                array_push($restaurants, $new_restaurant);
+            }
+            return $restaurants;
+        }
+
         static function getAll()
         {
             $returned_cuisines = $GLOBALS['DB']->query("SELECT * FROM cuisines;");

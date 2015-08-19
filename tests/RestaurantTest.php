@@ -132,11 +132,16 @@
         function test_getAll()
         {
             //Arrange
+            $cuisine_name = "Italian";
+            $test_cuisine = new Cuisine($cuisine_name);
+            $test_cuisine->save();
+
+            $cuisine_id = $test_cuisine->getId();
+
             $name = "Bar Bar";
             $location = "1234 Somewhere Ave";
             $hours = "9AM to 9PM";
             $description = "A place to eat";
-            $cuisine_id = 1;
             $test_restaurant = new Restaurant($name, $location, $hours, $description, $cuisine_id);
             $test_restaurant->save();
 
@@ -144,8 +149,7 @@
             $location2 = "34 Pizza St";
             $hours2 = "10PM to 10:05PM";
             $description2 = "A pizza joint";
-            $cuisine_id2 = 2;
-            $test_restaurant2 = new Restaurant($name2, $location2, $hours2, $description2, $cuisine_id2);
+            $test_restaurant2 = new Restaurant($name2, $location2, $hours2, $description2, $cuisine_id);
             $test_restaurant2->save();
 
             //Act
@@ -158,11 +162,16 @@
         function test_deleteAll()
         {
             //Arrange
+            $cuisine_name = "Italian";
+            $test_cuisine = new Cuisine($cuisine_name);
+            $test_cuisine->save();
+
+            $cuisine_id = $test_cuisine->getId();
+
             $name = "Bar Bar";
             $location = "1234 Somewhere Ave";
             $hours = "9AM to 9PM";
             $description = "A place to eat";
-            $cuisine_id = 1;
             $test_restaurant = new Restaurant($name, $location, $hours, $description, $cuisine_id);
             $test_restaurant->save();
 
@@ -170,8 +179,7 @@
             $location2 = "34 Pizza St";
             $hours2 = "10PM to 10:05PM";
             $description2 = "A pizza joint";
-            $cuisine_id2 = 2;
-            $test_restaurant2 = new Restaurant($name2, $location2, $hours2, $description2, $cuisine_id2);
+            $test_restaurant2 = new Restaurant($name2, $location2, $hours2, $description2, $cuisine_id);
             $test_restaurant2->save();
 
             //Act
