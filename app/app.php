@@ -22,5 +22,19 @@
         return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
     });
 
+    //Add cuisine
+    $app->post('/cuisines', function() use ($app) {
+        $cuisine = new Cuisine($_POST['name']);
+        $cuisine->save();
+        return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
+    });
+
+    //Delete all cuisines
+    $app->post('/delete_cuisines', function() use ($app) {
+        Cuisine::deleteAll();
+        return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
+    });
+
+
     return $app;
 ?>
