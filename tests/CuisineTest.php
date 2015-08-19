@@ -164,6 +164,29 @@
             //Assert
             $this->assertEquals([$test_cuisine2], Cuisine::getAll());
         }
+
+        function testDeleteCuisineRestaurants()
+        {
+            //Arrange
+            $cuisine_name = "Italian";
+            $test_cuisine = new Cuisine($cuisine_name);
+            $test_cuisine->save();
+
+            $cuisine_id = $test_cuisine->getId();
+
+            $name = "Bar Bar";
+            $location = "1234 Somewhere Ave";
+            $hours = "9AM to 9PM";
+            $description = "A place to eat";
+            $test_restaurant = new Restaurant($name, $location, $hours, $description, $cuisine_id);
+            $test_restaurant->save();
+
+            //Act
+            $test_cuisine->delete();
+
+            //Assert
+            $this->assertEquals([], Restaurant::getAll());
+        }
     }
 
  ?>
