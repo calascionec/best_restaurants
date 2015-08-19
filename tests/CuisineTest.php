@@ -130,6 +130,22 @@
             //Assert
             $this->assertEquals([$test_restaurant, $test_restaurant2], $result);
         }
+
+        function testUpdate()
+        {
+            //Arrange
+            $name = "Italian";
+            $test_cuisine = new Cuisine($name);
+            $test_cuisine->save();
+
+            $new_name = "Greek";
+
+            //Act
+            $test_cuisine->update($new_name);
+
+            //Assert
+            $this->assertEquals("Greek", $test_cuisine->getName());
+        }
     }
 
  ?>
