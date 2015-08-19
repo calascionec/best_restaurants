@@ -73,6 +73,35 @@
         {
             $this->id = $new_id;
         }
+
+        function save()
+        {
+            $GLOBALS['DB']->exec("INSERT INTO restaurants (name, location, hours, description, cuisine_id) VALUES ('{$this->getName()}', '{$this->getLocation()}', '{$this->getHours()}', '{$this->getDescription()}', {$this->getCuisineId()});");
+            $result_id = $GLOBALS['DB']->lastInsertId();
+            $this->setId($result_id);
+        }
+
+        static function getAll()
+        {
+            $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants;");
+            $restaurants = array();
+            foreach($returned_restaurants as $restaurant) {
+                $name = $restaurant['name'];
+                $location = $restaurant['location'];
+                $hours = $restaurant['hours'];
+                $description = $restaurant['description'];
+                $cuisine_id = $restaurant['cuisine_id'];
+                $id = $restaurant['id'];
+                $new_restaurant = new Restaurant($name, $location, $hours, $description, $cuisine_id, $id);
+                array_push($restaurants, $new_restaurant);
+            }
+            return $restaurants;
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM tasks;");
+        }
     }
 
 ?>
