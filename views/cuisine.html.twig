@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+        <title>Best Restaurants in Town</title>
+    </head>
+    <body>
+        <div class='container'>
+            <h1>{{ cuisine.getName }}</h1>
+            {% if restaurants is not empty %}
+                <p>List of Restaurants</p>
+                <ul>
+                    {% for restaurant in restaurants %}
+                        <li><h4>{{ restaurant.getName }}</h4>
+                            <ul>
+                                <li>{{ restaurant.getLocation }}</li>
+                                <li>Hours: {{ restaurant.getHours }}</li>
+                                <li>{{ restaurant.getDescription }}</li>
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <h4>No restaurants listed</h4>
+            {% endif %}
+
+            <form action = '/restaurants' method = 'post'>
+                <input id='cuisine_id' name='cuisine_id' type='hidden' value='{{ cuisine.getId() }}'>
+                <label for="name">Restaurant Name</label>
+                <input type="text" name="name" id="name">
+                <label for="location">Restaurant Location</label>
+                <input type="text" name="location" id="location">
+                <label for="hours">Restaurant Hours</label>
+                <input type="text" name="hours" id="hours">
+                <label for="description">Restaurant Description</label>
+                <input type="text" name="description" id="description">
+                <button type='submit'>Submit</button>
+            </form>
+
+        </div>
+    </body>
+</html>
