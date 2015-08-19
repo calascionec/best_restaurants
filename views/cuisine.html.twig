@@ -15,6 +15,19 @@
                                 <li>{{ restaurant.getLocation }}</li>
                                 <li>Hours: {{ restaurant.getHours }}</li>
                                 <li>{{ restaurant.getDescription }}</li>
+                                <li>
+                                    <!-- need to change routing -->
+                                    <!-- <form action="/cuisines/{{ cuisine.getId }}" method="post">
+                                        <input name="_method" type="hidden" value="delete">
+
+                                        <button type="submit">Update</button>
+                                    </form>
+                                    <form action="/cuisines/{{ cuisine.getId }}" method="post">
+                                        <input name="_method" type="hidden" value="delete">
+
+                                        <button type="submit" class="btn-danger">Delete</button>
+                                    </form> -->
+                                </li>
                             </ul>
                         </li>
                     {% endfor %}
@@ -25,14 +38,22 @@
 
             <form action = '/restaurants' method = 'post'>
                 <input id='cuisine_id' name='cuisine_id' type='hidden' value='{{ cuisine.getId() }}'>
-                <label for="name">Restaurant Name</label>
-                <input type="text" name="name" id="name">
-                <label for="location">Restaurant Location</label>
-                <input type="text" name="location" id="location">
-                <label for="hours">Restaurant Hours</label>
-                <input type="text" name="hours" id="hours">
-                <label for="description">Restaurant Description</label>
-                <input type="text" name="description" id="description">
+                <div class="form-group">
+                    <label for="name">Restaurant Name</label>
+                    <input type="text" name="name" id="name">
+                </div>
+                <div class="form-group">
+                    <label for="location">Restaurant Location</label>
+                    <input type="text" name="location" id="location">
+                </div>
+                <div class="form-group">
+                    <label for="hours">Restaurant Hours</label>
+                    <input type="text" name="hours" id="hours">
+                </div>
+                <div class="form-group">
+                    <label for="description">Restaurant Description</label>
+                    <input type="text" name="description" id="description">
+                </div>
                 <button type='submit'>Submit</button>
             </form>
 

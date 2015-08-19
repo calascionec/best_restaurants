@@ -22,12 +22,10 @@
                     {% for cuisine in cuisines %}
                         <li>
                             <a href="/cuisines/{{ cuisine.getId }}">{{ cuisine.getName }}</a>
-                            <form action="/cuisines/{{ cuisine.getId }}" method="post">
-                                <input name="_method" type="hidden" value="delete">
-
+                            <form action="/cuisines/{{ cuisine.getId }}/edit">
                                 <button type="submit">Update</button>
                             </form>
-                            <form action="/cuisines/{{ cuisine.getId }}" method="post">
+                            <form action="/cuisines/{{ cuisine.getId }}/delete" method="post">
                                 <input name="_method" type="hidden" value="delete">
 
                                 <button type="submit" class="btn-danger">Delete</button>

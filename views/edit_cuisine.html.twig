@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+        <title>Best Restaurants in Town</title>
+    </head>
+    <body>
+        <div class='container'>
+            <form action="/cuisines/{id}" method="post">
+                <!-- seems like we need this
+                <input id='cuisine_id' name='cuisine_id' type='hidden' value='{{ cuisine.getId() }}'> -->
+                <input name="_method" type="hidden" value="patch">
+                <label for="name">New cuisine name</label>
+                <input id="name" name="name" type="text">
+
+                <button type="submit">Add</button>
+            </form>
+
+        </div>
+    </body>
+</html>

@@ -41,6 +41,7 @@
         return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
     });
 
+    //Add a restaurant to a cuisine page
     $app->post('/restaurants', function() use ($app) {
         $name = $_POST['name'];
         $location = $_POST['location'];
@@ -52,6 +53,21 @@
         $cuisine = Cuisine::find($cuisine_id);
         return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
     });
+
+    //Update page for a cuisine
+    $app->get("/cuisines/{id}/edit", function($id) use ($app) {
+        $cuisine = Cuisine::find($id);
+        return $app['twig']->render('edit_cuisine.html.twig', array('cuisine' => $cuisine));
+    });
+
+
+    // updates name of cuisine and returns to TBD
+    // $app->patch("/cuisines/{id}", function($id) use ($app) {
+    //     $name = $_POST['name'];
+    //     $cuisine = Cuisine::find($id);
+    //     $cuisine->update($name);
+    //     return $app['twig']->render('cuisine.')
+    // });
 
 
     return $app;
