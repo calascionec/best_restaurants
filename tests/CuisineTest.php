@@ -146,6 +146,24 @@
             //Assert
             $this->assertEquals("Greek", $test_cuisine->getName());
         }
+
+        function testDelete()
+        {
+            //Arrange
+            $name = "Italian";
+            $test_cuisine = new Cuisine($name);
+            $test_cuisine->save();
+
+            $name2 = "Greek";
+            $test_cuisine2 = new Cuisine($name2);
+            $test_cuisine2->save();
+
+            //Act
+            $test_cuisine->delete();
+
+            //Assert
+            $this->assertEquals([$test_cuisine2], Cuisine::getAll());
+        }
     }
 
  ?>
