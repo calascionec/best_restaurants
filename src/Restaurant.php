@@ -87,6 +87,11 @@
             //$this->name = $new_info;
         }
 
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM restaurants WHERE id = {$this->getId()};");
+        }
+
         static function getAll()
         {
             $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants;");
