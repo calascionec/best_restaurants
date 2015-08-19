@@ -81,6 +81,12 @@
             $this->setId($result_id);
         }
 
+        function update($column_to_update, $new_info)
+        {
+            $GLOBALS['DB']->exec("UPDATE restaurants SET {$column_to_update} = '{$new_info}' WHERE id = {$this->getId()};");
+            //$this->name = $new_info;
+        }
+
         static function getAll()
         {
             $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants;");
@@ -102,6 +108,7 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM restaurants;");
         }
+
     }
 
 ?>

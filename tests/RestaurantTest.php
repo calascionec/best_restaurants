@@ -213,7 +213,38 @@
             $test_restaurant->update($column_update, $new_name);
 
             //Assert
-            $this->assertEquals("The New Spot", $test_restaurant->getName());
+            //$this->assertEquals("The New Spot", $test_restaurant->getName());
+            $result = Restaurant::getAll();
+            $this->assertEquals("The New Spot", $result[0]->getName());
+
+        }
+
+        function testUpdateLocation()
+        {
+            //Arrange
+            $cuisine_name = "Italian";
+            $test_cuisine = new Cuisine($cuisine_name);
+            $test_cuisine->save();
+
+            $cuisine_id = $test_cuisine->getId();
+
+            $name = "Bar Bar";
+            $location = "1234 Somewhere Ave";
+            $hours = "9AM to 9PM";
+            $description = "A place to eat";
+            $test_restaurant = new Restaurant($name, $location, $hours, $description, $cuisine_id);
+            $test_restaurant->save();
+
+            $new_location = "1234 not somewhere circle";
+            $column_update = "location";
+
+            //Act
+            $test_restaurant->update($column_update, $new_location);
+
+            //Assert
+            //$this->assertEquals("The New Spot", $test_restaurant->getName());
+            $result = Restaurant::getAll();
+            $this->assertEquals("1234 not somewhere circle", $result[0]->getLocation());
 
         }
     }
