@@ -37,5 +37,56 @@
             //Assert
             $this->assertEquals($name, $result);
         }
+
+        function test_getLocation()
+        {
+            //Arrange
+            $name = "Bar Bar";
+            $location = "1234 Somewhere Ave";
+            $hours = "9AM to 9PM";
+            $description = "A place to eat";
+            $cuisine_id = 1;
+            $test_restaurant = new Restaurant($name, $location, $hours, $description, $cuisine_id);
+
+            //Act
+            $result = $test_restaurant->getLocation();
+
+            //Assert
+            $this->assertEquals($location, $result);
+        }
+
+        function test_getHours()
+        {
+            //Arrange
+            $name = "Bar Bar";
+            $location = "1234 Somewhere Ave";
+            $hours = "9AM to 9PM";
+            $description = "A place to eat";
+            $cuisine_id = 1;
+            $test_restaurant = new Restaurant($name, $location, $hours, $description, $cuisine_id);
+
+            //Act
+            $result = $test_restaurant->getHours();
+
+            //Assert
+            $this->assertEquals($hours, $result);
+        }
+
+        function test_getDescription()
+        {
+            //Arrange
+            $name = "Bar Bar";
+            $location = "1234 Somewhere Ave";
+            $hours = "9AM to 9PM";
+            $description = "A place to eat";
+            $cuisine_id = 1;
+            $test_restaurant = new Restaurant($name, $location, $hours, $description, $cuisine_id);
+
+            //Act
+            $result = $test_restaurant->getDescription();
+
+            //Assert
+            $this->assertEquals($description, $result);
+        }
     }
 ?>
