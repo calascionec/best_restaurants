@@ -2,10 +2,10 @@
 
     class Cuisine
     {
-        private name;
-        private id;
+        private $name;
+        private $id;
 
-        function __contruct($name, $id = null)
+        function __construct($name, $id = null)
         {
             $this->name = $name;
             $this->id = $id;
