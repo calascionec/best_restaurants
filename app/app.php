@@ -106,6 +106,13 @@
         return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
     });
 
+    //Delete all restaurants
+    $app->post('/delete_restaurants', function() use ($app) {
+        Restaurant::deleteAll();
+        $cuisine = Cuisine::find($_POST['cuisine_id']);
+        return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
+    });
+
 
     return $app;
 ?>

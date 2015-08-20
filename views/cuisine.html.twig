@@ -55,6 +55,11 @@
                 <button type='submit'>Submit</button>
             </form>
 
+            <form action="/delete_restaurants" method="post">
+                <input id='cuisine_id' name='cuisine_id' type='hidden' value='{{ cuisine.getId() }}'>
+                <button type="submit">Clear</button>
+            </form>
+
         </div>
     </body>
 </html>
