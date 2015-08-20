@@ -26,7 +26,6 @@
                                 <button type="submit">Update</button>
                             </form>
                             <form action="/cuisines/{{ cuisine.getId }}/delete" method="post">
-                                <!-- <input id='cuisine_id' name='cuisine_id' type='hidden' value='{{ cuisine.getId() }}'> -->
                                 <input name="_method" type="hidden" value="delete">
 
                                 <button type="submit" class="btn-danger">Delete</button>

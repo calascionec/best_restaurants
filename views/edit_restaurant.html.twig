@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+        <title>Best Restaurants in Town</title>
+    </head>
+    <body>
+        <div class="container">
+            <form action = '/restaurants/{{ restaurant.getId }}' method = 'post'>
+                <input id='cuisine_id' name='cuisine_id' type='hidden' value='{{ restaurant.getCuisineId() }}'>
+                <input name="_method" type="hidden" value="patch">
+                <div class="form-group">
+                    <input type="checkbox" id="checkbox1" onclick="if (this.checked){ document.getElementById('name').removeAttribute('disabled');}" />
+                    <label for="name">Restaurant Name</label>
+                    <input type="text" name="name" id="name" disabled>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="checkbox2" onclick="if (this.checked){ document.getElementById('location').removeAttribute('disabled');}" />
+                    <label for="location">Restaurant Location</label>
+                    <input type="text" name="location" id="location" disabled>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="checkbox3" onclick="if (this.checked){ document.getElementById('hours').removeAttribute('disabled');}" />
+                    <label for="hours">Restaurant Hours</label>
+                    <input type="text" name="hours" id="hours" disabled>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="checkbox4" onclick="if (this.checked){ document.getElementById('description').removeAttribute('disabled');}" />
+                    <label for="description">Restaurant Description</label>
+                    <input type="text" name="description" id="description" disabled>
+                </div>
+                <button type='submit'>Submit</button>
+            </form>
+        </div>
+    </body>
+</html>

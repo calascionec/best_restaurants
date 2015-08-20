@@ -16,17 +16,14 @@
                                 <li>Hours: {{ restaurant.getHours }}</li>
                                 <li>{{ restaurant.getDescription }}</li>
                                 <li>
-                                    <!-- need to change routing -->
-                                    <!-- <form action="/cuisines/{{ cuisine.getId }}" method="post">
-                                        <input name="_method" type="hidden" value="delete">
-
+                                    <form action="/restaurants/{{ restaurant.getId }}/edit">        
                                         <button type="submit">Update</button>
                                     </form>
-                                    <form action="/cuisines/{{ cuisine.getId }}" method="post">
+                                    <form action="/restaurants/{{ restaurant.getId }}/delete" method="post">
                                         <input name="_method" type="hidden" value="delete">
 
                                         <button type="submit" class="btn-danger">Delete</button>
-                                    </form> -->
+                                    </form>
                                 </li>
                             </ul>
                         </li>

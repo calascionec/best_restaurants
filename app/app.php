@@ -5,6 +5,8 @@
 
     $app = new Silex\Application();
 
+    $app['debug'] = true;
+
     $server = 'mysql:host=localhost;dbname=best_restaurants';
     $username = 'root';
     $password = 'root';
@@ -64,7 +66,6 @@
     // updates name of cuisine and returns to root route
     $app->patch("/cuisines/{id}", function($id) use ($app) {
         $name = $_POST['name'];
-        // $cuisine_id = $_POST['cuisine_id'];
         $cuisine = Cuisine::find($id);
         $cuisine->update($name);
         return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
@@ -72,10 +73,29 @@
 
     // delete cuisine and return to root route
     $app->delete("/cuisines/{id}/delete", function($id) use ($app) {
-        // $cuisine_id = $_POST['cuisine_id'];
         $cuisine = Cuisine::find($id);
         $cuisine->delete();
         return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
+    });
+
+    //display update page for restaurant
+    $app->get("/restaurants/{id}/edit", function($id) use ($app) {
+        $restaurant = Restaurant::find($id);
+        $cuisine_id = $restaurant->getCuisineId();
+        return $app['twig']->render('edit_restaurant.html.twig', array('restaurant' => $restaurant, 'cuisine' => $cuisine_id));
+    });
+
+    //update restaurant details that have been changed
+    $app->patch('/restaurants/{id}', function($id) use ($app) {
+            $restaurant = Restaurant::find($id);
+            $cuisine = Cuisine::find($_POST['cuisine_id']);
+            foreach($_POST as $key => $value) {
+                if ( !empty($value) ) {
+                    $restaurant->update($key, $value);
+                }
+            }
+            return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
+
     });
 
 
