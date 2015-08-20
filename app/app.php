@@ -64,9 +64,17 @@
     // updates name of cuisine and returns to root route
     $app->patch("/cuisines/{id}", function($id) use ($app) {
         $name = $_POST['name'];
-        $cuisine_id = $_POST['cuisine_id'];
-        $cuisine = Cuisine::find($cuisine_id);
+        // $cuisine_id = $_POST['cuisine_id'];
+        $cuisine = Cuisine::find($id);
         $cuisine->update($name);
+        return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
+    });
+
+    // delete cuisine and return to root route
+    $app->delete("/cuisines/{id}/delete", function($id) use ($app) {
+        // $cuisine_id = $_POST['cuisine_id'];
+        $cuisine = Cuisine::find($id);
+        $cuisine->delete();
         return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
     });
 
