@@ -61,13 +61,14 @@
     });
 
 
-    // updates name of cuisine and returns to TBD
-    // $app->patch("/cuisines/{id}", function($id) use ($app) {
-    //     $name = $_POST['name'];
-    //     $cuisine = Cuisine::find($id);
-    //     $cuisine->update($name);
-    //     return $app['twig']->render('cuisine.')
-    // });
+    // updates name of cuisine and returns to root route
+    $app->patch("/cuisines/{id}", function($id) use ($app) {
+        $name = $_POST['name'];
+        $cuisine_id = $_POST['cuisine_id'];
+        $cuisine = Cuisine::find($cuisine_id);
+        $cuisine->update($name);
+        return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
+    });
 
 
     return $app;
