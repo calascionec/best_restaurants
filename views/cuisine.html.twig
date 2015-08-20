@@ -16,10 +16,11 @@
                                 <li>Hours: {{ restaurant.getHours }}</li>
                                 <li>{{ restaurant.getDescription }}</li>
                                 <li>
-                                    <form action="/restaurants/{{ restaurant.getId }}/edit">        
+                                    <form action="/restaurants/{{ restaurant.getId }}/edit">
                                         <button type="submit">Update</button>
                                     </form>
                                     <form action="/restaurants/{{ restaurant.getId }}/delete" method="post">
+                                        <input id='cuisine_id' name='cuisine_id' type='hidden' value='{{ restaurant.getCuisineId() }}'>
                                         <input name="_method" type="hidden" value="delete">
 
                                         <button type="submit" class="btn-danger">Delete</button>

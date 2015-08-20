@@ -98,6 +98,14 @@
 
     });
 
+    // delete restaurant and return to cuisine route
+    $app->delete("/restaurants/{id}/delete", function($id) use ($app) {
+        $restaurant = Restaurant::find($id);
+        $restaurant->delete();
+        $cuisine = Cuisine::find($_POST['cuisine_id']);
+        return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
+    });
+
 
     return $app;
 ?>
