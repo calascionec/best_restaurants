@@ -1,19 +1,26 @@
 <html>
     <head>
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='styles.css'>
         <title>Best Restaurants in Town</title>
+
     </head>
     <body>
-        <div class='container'>
-            <h1>Sup?</h1>
+        <video autoplay loop muted id="bgvid">
+            <source src="dog.mp4" type="video/mp4">
+            <source src="/../../dog.mp4" type="video/mp4">
+        </video>
+        <div class='container home'>
+            <h1>Welcome!</h1>
+            <p>Create a list of your favorite restaurants</p>
 
             <p>Add a type of cuisine:</p>
 
             <form action="/cuisines" method="post">
-                <label for="name">Cuisine name</label>
-                <input id="name" name="name" type="text">
-
-                <button type="submit">Add</button>
+                <label for="name">Cuisine:</label>
+                <input id="name" name="name" type="text" class='form-control'>
+                <br>
+                <button type="submit" class="btn btn-xs btn-info">Add</button>
             </form>
 
             {% if cuisines is not empty %}
@@ -22,14 +29,21 @@
                     {% for cuisine in cuisines %}
                         <li>
                             <a href="/cuisines/{{ cuisine.getId }}">{{ cuisine.getName }}</a>
-                            <form action="/cuisines/{{ cuisine.getId }}/edit">
-                                <button type="submit">Update</button>
-                            </form>
-                            <form action="/cuisines/{{ cuisine.getId }}/delete" method="post">
-                                <input name="_method" type="hidden" value="delete">
 
-                                <button type="submit" class="btn-danger">Delete</button>
-                            </form>
+                            <ul class="list-unstyled list-inline">
+                                <li>
+                                    <form action="/cuisines/{{ cuisine.getId }}/edit">
+                                        <button type="submit" class="btn btn-xs btn-info">Update</button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form action="/cuisines/{{ cuisine.getId }}/delete" method="post">
+                                        <input name="_method" type="hidden" value="delete">
+
+                                        <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+                                    </form>
+                                </li>
+                            </ul>
                         </li>
                     {% endfor %}
                 </ul>
