@@ -5,61 +5,72 @@
     </head>
     <body>
         <div class='container'>
-            <h1>{{ cuisine.getName }}</h1>
-            {% if restaurants is not empty %}
-                <p>List of Restaurants</p>
-                <ul>
-                    {% for restaurant in restaurants %}
-                        <li><h4>{{ restaurant.getName }}</h4>
-                            <ul>
-                                <li>{{ restaurant.getLocation }}</li>
-                                <li>Hours: {{ restaurant.getHours }}</li>
-                                <li>{{ restaurant.getDescription }}</li>
-                                <li>
-                                    <form action="/restaurants/{{ restaurant.getId }}/edit">
-                                        <button type="submit">Update</button>
-                                    </form>
-                                    <form action="/restaurants/{{ restaurant.getId }}/delete" method="post">
-                                        <input id='cuisine_id' name='cuisine_id' type='hidden' value='{{ restaurant.getCuisineId() }}'>
-                                        <input name="_method" type="hidden" value="delete">
+            <div class='row'>
+                <h1>{{ cuisine.getName }}</h1>
+            </div>
 
-                                        <button type="submit" class="btn-danger">Delete</button>
-                                    </form>
+            <div class="row">
+                <div class="col-sm-4">
+                    <form action = '/restaurants' method = 'post'>
+                        <input id='cuisine_id' name='cuisine_id' type='hidden' value='{{ cuisine.getId() }}'>
+                        <div class="form-group">
+                            <label for="name">Restaurant Name</label>
+                            <input type="text" name="name" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Restaurant Location</label>
+                            <input type="text" name="location" id="location" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hours">Restaurant Hours</label>
+                            <input type="text" name="hours" id="hours" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Restaurant Description</label>
+                            <input type="text" name="description" id="description" class="form-control" required>
+                        </div>
+                        <button type='submit'>Submit</button>
+                    </form>
+                    <form action="/delete_restaurants" method="post">
+                        <input id='cuisine_id' name='cuisine_id' type='hidden' value='{{ cuisine.getId() }}'>
+                        <button type="submit">Clear</button>
+                    </form>
+                    <a href='/'>Home</a>
+                </div>
+
+
+                <div class="col-sm-4 col-sm-offset-4">
+                    {% if restaurants is not empty %}
+                        <p>List of Restaurants</p>
+                        <ul>
+                            {% for restaurant in restaurants %}
+                                <li><h4>{{ restaurant.getName }}</h4>
+                                    <ul class="list-unstyled">
+                                        <li>Location:{{ restaurant.getLocation }}</li>
+                                        <li>Hours: {{ restaurant.getHours }}</li>
+                                        <li>Description:{{ restaurant.getDescription }}</li>
+                                        <li>
+                                            <ul class="list-unstyled list-inline">
+                                                <li><form action="/restaurants/{{ restaurant.getId }}/edit">
+                                                    <button type="submit" class="btn btn-primary btn-xs">Update</button>
+                                                </form></li>
+                                                <li><form action="/restaurants/{{ restaurant.getId }}/delete" method="post">
+                                                    <input id='cuisine_id' name='cuisine_id' type='hidden' value='{{ restaurant.getCuisineId() }}'>
+                                                    <input name="_method" type="hidden" value="delete">
+
+                                                    <button type="submit" class="btn btn-danger btn-xs">Delete</button>
+                                                </form></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 </li>
-                            </ul>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <h4>No restaurants listed</h4>
-            {% endif %}
-
-            <form action = '/restaurants' method = 'post'>
-                <input id='cuisine_id' name='cuisine_id' type='hidden' value='{{ cuisine.getId() }}'>
-                <div class="form-group">
-                    <label for="name">Restaurant Name</label>
-                    <input type="text" name="name" id="name">
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <h4>No restaurants listed</h4>
+                    {% endif %}
                 </div>
-                <div class="form-group">
-                    <label for="location">Restaurant Location</label>
-                    <input type="text" name="location" id="location">
-                </div>
-                <div class="form-group">
-                    <label for="hours">Restaurant Hours</label>
-                    <input type="text" name="hours" id="hours">
-                </div>
-                <div class="form-group">
-                    <label for="description">Restaurant Description</label>
-                    <input type="text" name="description" id="description">
-                </div>
-                <button type='submit'>Submit</button>
-            </form>
-
-            <form action="/delete_restaurants" method="post">
-                <input id='cuisine_id' name='cuisine_id' type='hidden' value='{{ cuisine.getId() }}'>
-                <button type="submit">Clear</button>
-            </form>
-
+            </div>
         </div>
     </body>
 </html>

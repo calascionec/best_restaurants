@@ -26,8 +26,10 @@
 
     //Add cuisine
     $app->post('/cuisines', function() use ($app) {
-        $cuisine = new Cuisine($_POST['name']);
-        $cuisine->save();
+        if (!empty($_POST['name'])) {
+            $cuisine = new Cuisine(preg_quote($_POST['name'], "'"));
+            $cuisine->save();
+        }
         return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
     });
 
@@ -45,16 +47,17 @@
 
     //Add a restaurant to a cuisine page
     $app->post('/restaurants', function() use ($app) {
-        $name = $_POST['name'];
-        $location = $_POST['location'];
-        $hours = $_POST['hours'];
-        $description = $_POST['description'];
+        $name = preg_quote($_POST['name'], "'");
+        $location = preg_quote($_POST['location'], "'");
+        $hours = preg_quote($_POST['hours'], "'");
+        $description = preg_quote($_POST['description'], "'");
         $cuisine_id = $_POST['cuisine_id'];
         $restaurant = new Restaurant($name, $location, $hours, $description, $cuisine_id);
         $restaurant->save();
         $cuisine = Cuisine::find($cuisine_id);
         return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
     });
+
 
     //Update page for a cuisine
     $app->get("/cuisines/{id}/edit", function($id) use ($app) {
@@ -65,9 +68,11 @@
 
     // updates name of cuisine and returns to root route
     $app->patch("/cuisines/{id}", function($id) use ($app) {
-        $name = $_POST['name'];
-        $cuisine = Cuisine::find($id);
-        $cuisine->update($name);
+        if (!empty($_POST['name'])) {
+            $name = $_POST['name'];
+            $cuisine = Cuisine::find($id);
+            $cuisine->update($name);
+        }
         return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
     });
 

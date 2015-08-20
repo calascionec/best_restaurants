@@ -84,7 +84,7 @@
         function update($column_to_update, $new_info)
         {
             $GLOBALS['DB']->exec("UPDATE restaurants SET {$column_to_update} = '{$new_info}' WHERE id = {$this->getId()};");
-            //$this->name = $new_info;
+            
         }
 
         function delete()
